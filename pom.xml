@@ -22,8 +22,8 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
         <cucumber.version>7.15.0</cucumber.version>
         <junit.version>4.13.2</junit.version>
-        <appium.version>9.2.0</appium.version>
-        <selenium.version>4.16.1</selenium.version>
+        <appium.version>9.5.0</appium.version>
+        <selenium.version>4.34.0</selenium.version>
         <allure.version>2.25.0</allure.version>
     </properties>
 
@@ -72,6 +72,12 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <artifactId>allure-cucumber7-jvm</artifactId>
             <version>${allure.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>13.0</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

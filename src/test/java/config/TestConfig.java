@@ -3,7 +3,7 @@ package config;
 public class TestConfig {
 
     public static final String APPIUM_URL = "http://127.0.0.1:4723";
-
+    public static final String APPIUM_UIID = "adb-kzzhlnqstkmrwcrs-3DIym6._adb-tls-connect._tcp";
     public static final String PLATFORM_NAME = "Android";
     public static final String DEVICE_NAME = "Xiaomi14";
 
