@@ -1,4 +1,4 @@
-package steps;
+package Steps;
 
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Quando;

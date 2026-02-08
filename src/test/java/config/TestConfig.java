@@ -7,8 +7,8 @@ public class TestConfig {
     public static final String PLATFORM_NAME = "Android";
     public static final String DEVICE_NAME = "Xiaomi14";
 
-    public static final String APP_PACKAGE = "com.fanatee.codycross";
-    public static final String APP_ACTIVITY = "com.fanatee.codycross.activity.MainActivity";
+    public static final String APP_PACKAGE = "com.fanatee.cody";
+    public static final String APP_ACTIVITY = "com.fanatee.cody.CodyUnityPlayerActivity";
 
     public static final boolean NO_RESET = true;
 

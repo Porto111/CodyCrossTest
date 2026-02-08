@@ -23,9 +23,13 @@ public class DriverFactory {
         UiAutomator2Options options = new UiAutomator2Options()
                 .setDeviceName(TestConfig.DEVICE_NAME)
                 .setPlatformName(TestConfig.PLATFORM_NAME)
+                .setAutomationName("UIAutomator2")
+                // App já instalado: informar apenas o package e permitir auto-discovery da activity
                 .setAppPackage(TestConfig.APP_PACKAGE)
-                .setAppActivity(TestConfig.APP_ACTIVITY)
-                .setNoReset(TestConfig.NO_RESET);
+                .setAppActivity(TestConfig.APP_ACTIVITY) // REMOVIDO para evitar erro de Activity inexistente
+                .setNoReset(true) // manter dados do app
+                .setAutoGrantPermissions(true) // conceder permissões automaticamente
+                .setAppWaitForLaunch(false); // não aguardar lançamento se já estiver em foreground
 
         try {
             driver = new AndroidDriver(
