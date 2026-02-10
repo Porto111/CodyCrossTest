@@ -7,11 +7,11 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DriverFactory {
+public class DriverFactory {  // <- Removido import Supplier
 
     private static AndroidDriver driver;
 
-    public static AndroidDriver getDriver() {
+    public static AndroidDriver getDriver() {  // <- Mudança aqui: retorna AndroidDriver
         if (driver == null) {
             createDriver();
         }
@@ -19,17 +19,15 @@ public class DriverFactory {
     }
 
     private static void createDriver() {
-
         UiAutomator2Options options = new UiAutomator2Options()
                 .setDeviceName(TestConfig.DEVICE_NAME)
                 .setPlatformName(TestConfig.PLATFORM_NAME)
                 .setAutomationName("UIAutomator2")
-                // App já instalado: informar apenas o package e permitir auto-discovery da activity
                 .setAppPackage(TestConfig.APP_PACKAGE)
-                .setAppActivity(TestConfig.APP_ACTIVITY) // REMOVIDO para evitar erro de Activity inexistente
-                .setNoReset(true) // manter dados do app
-                .setAutoGrantPermissions(true) // conceder permissões automaticamente
-                .setAppWaitForLaunch(false); // não aguardar lançamento se já estiver em foreground
+                .setAppActivity(TestConfig.APP_ACTIVITY)
+                .setNoReset(true)
+                .setAutoGrantPermissions(true)
+                .setAppWaitForLaunch(false);
 
         try {
             driver = new AndroidDriver(
