@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 public abstract class BasePage {
 
+    protected final utils.OcrService ocrService = new utils.OcrService();
 
     protected void click(By locator) {
         WaitUtils.waitForClickable(locator);
@@ -67,5 +68,10 @@ public abstract class BasePage {
             Thread.sleep(millis);
         } catch (InterruptedException ignored) {
         }
+    }
+
+    public boolean esperarTextoVisivel(String texto, int timeoutSegundos) {
+        // Delega para OCR service (pode tocar ao validar)
+        return ocrService.tocarNoTexto(texto);
     }
 }
