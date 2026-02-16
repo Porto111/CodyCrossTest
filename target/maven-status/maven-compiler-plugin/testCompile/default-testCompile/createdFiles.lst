@@ -1,9 +1,0 @@
-config\TestConfig.class
-pages\BasePage.class
-pages\HomePage.class
-pages\LevelPage.class
-drivers\DriverFactory.class
-Steps\CodyCrossSteps.class
-hooks\Hooks.class
-runners\CucumberTesteRunner.class
-utils\WaitUtils.class
