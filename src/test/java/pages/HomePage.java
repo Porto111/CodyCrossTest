@@ -3,11 +3,21 @@ package pages;
 public class HomePage extends BasePage {
 
     public void tocarBotaoJogar() {
-        ocrService.tocarNoTexto("Jogar");
+        if (!tocarPorTexto("Jogar")) {
+            throw new RuntimeException("Texto 'Jogar' não encontrado na tela via OCR.");
+        }
+    }
+
+    public void tocarBotaoSalvarProgresso() {
+        if (!tocarPorTexto("Salvar progresso")) {
+            throw new RuntimeException("Texto 'Salvar progresso' não encontrado na tela via OCR.");
+        }
     }
 
     public void selecionarPrimeiroNivel() {
-        ocrService.tocarNoTexto("Nível 1");
+        if (!tocarPorTexto("Nível 1")) {
+            throw new RuntimeException("Texto 'Nível 1' não encontrado na tela via OCR.");
+        }
     }
 
     public boolean telaInicialEstaVisivel() {

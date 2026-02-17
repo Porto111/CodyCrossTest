@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class DriverFactory {  // <- Removido import Supplier
 
-    private static AndroidDriver driver;
+    public static AndroidDriver driver;
 
     public static AndroidDriver getDriver() {  // <- Mudança aqui: retorna AndroidDriver
         if (driver == null) {

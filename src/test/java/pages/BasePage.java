@@ -17,6 +17,7 @@ public abstract class BasePage {
 
     protected final utils.OcrService ocrService = new utils.OcrService();
 
+
     protected void click(By locator) {
         WaitUtils.waitForClickable(locator);
         DriverFactory.getDriver().findElement(locator).click();
@@ -70,8 +71,20 @@ public abstract class BasePage {
         }
     }
 
-    public boolean esperarTextoVisivel(String texto, int timeoutSegundos) {
-        // Delega para OCR service (pode tocar ao validar)
+    public boolean tocarPorTexto(String texto) {
+        // passa um lambda que chama o tap da própria BasePage
         return ocrService.tocarNoTexto(texto);
+    }
+
+    public boolean esperarTextoVisivel(String texto, int timeoutSegundos) {
+        long fim = System.currentTimeMillis() + timeoutSegundos * 1000L;
+        while (System.currentTimeMillis() < fim) {
+            String tela = ocrService.getTextFromScreen();
+            if (tela.toLowerCase().contains(texto.toLowerCase())) {
+                return true;
+            }
+            pause(500);
+        }
+        return false;
     }
 }

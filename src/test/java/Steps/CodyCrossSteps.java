@@ -1,39 +1,44 @@
 package Steps;
 
-import io.cucumber.java.pt.*;
+import io.cucumber.java.pt.Dado;
+import io.cucumber.java.pt.Entao;
+import io.cucumber.java.pt.Então;
+import io.cucumber.java.pt.Quando;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HomePage;
 import pages.LevelPage;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.time.Duration;
+
+import static drivers.DriverFactory.driver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CodyCrossSteps {
     private final HomePage homePage = new HomePage();
     private final LevelPage levelPage = new LevelPage();
 
-    @Dado("que o aplicativo CodyCross está instalado")
-    public void appInstalado() {
-        // Pré-condição assumida; Driver é inicializado pelos hooks existentes
-        assertNotNull("Driver não inicializado");
-    }
+    @Dado("que o aplicativo CodyCross foi aberto")
+    public void queOAplicativoCodyCrossFoiAberto() {
 
-    @Quando("eu abro o aplicativo")
-    public void euAbroOAplicativo() {
-        // Com DriverFactory + Hooks, o app já deve estar em foreground
-    }
+        String packageName = "com.fanatee.cody"; // ajuste para o pacote real
 
-    @Então("devo ver a tela de splash com logo {string}")
-    public void devoVerTelaSplashLogo(String logo) {
-        assertTrue(homePage.esperarTextoVisivel(logo, 10), "Logo não encontrado via OCR");
-    }
+        // Garante que o app está instalado
+        if (!driver.isAppInstalled(packageName)) {
+            throw new IllegalStateException("App CodyCross não está instalado no dispositivo.");
+        }
 
-    @E("devo ver botão {string}")
-    public void devoVerBotao(String textoBotao) {
-        assertTrue(homePage.esperarTextoVisivel(textoBotao, 10), "Botão não encontrado via OCR");
-    }
+        // Garante que o app está aberto (se já não foi aberto pelas capabilities)
+        driver.activateApp(packageName); // ou driver.launchApp() se usar desired capabilities
 
-    @Dado("que estou na tela inicial")
-    public void queEstouNaTelaInicial() {
-        assertTrue(homePage.telaInicialEstaVisivel(), "Tela inicial não visível");
+        // Espera explícita até a primeira tela carregar
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        // Troque o localizador abaixo por algo confiável da tela inicial do CodyCross
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//android.widget.TextView[@content-desc=\"CodyCross\"]"))
+        );
     }
 
     @Quando("eu toco no botão {string}")
@@ -42,29 +47,34 @@ public class CodyCrossSteps {
         homePage.tocarBotaoJogar();
     }
 
-    @Quando("seleciono o primeiro nível")
-    public void selecionoPrimeiroNivel() {
-        homePage.selecionarPrimeiroNivel();
+
+    @Então("devo ver a tela de splash com logo {string}")
+    public void devoVerTelaSplashLogo(String logo) {
+        assertTrue(homePage.esperarTextoVisivel(logo, 10), "Logo não encontrado via OCR");
     }
 
-    @Então("devo ver o tabuleiro com letras disponíveis")
-    public void devoVerTabuleiro() {
-        assertTrue(levelPage.esperarTextoVisivel("A", 10), "Letra A não visível no tabuleiro");
+    @Dado("que o aplicativo CodyCross foi aberto")
+    public void que_o_aplicativo_codycross_foi_aberto() {
+        // aqui você já garante que o app está iniciado e a home carregou
+        boolean visivel = homePage.telaInicialEstaVisivel();
+        Assert.assertTrue("Tela inicial do CodyCross não está visível.", visivel);
     }
 
-    @Quando("eu seleciono a letra {string} no tabuleiro")
-    public void euSelecionoALetraNoTabuleiro(String letra) {
-        levelPage.selecionarLetraTabuleiro(letra);
+    @Quando("eu tocar no botão Jogar")
+    public void eu_tocar_no_botao_jogar() {
+        homePage.tocarBotaoJogar();
     }
 
-    @E("preencho a primeira palavra parcialmente")
-    public void preenchoPrimeiraPalavraParcialmente() {
-        levelPage.preencherPrimeiraPalavra();
+    @Quando("eu tocar no botão Salvar progresso")
+    public void eu_tocar_no_botao_salvar_progresso() {
+        homePage.tocarBotaoSalvarProgresso();
     }
 
-    @Então("o progresso deve ser atualizado")
-    public void progressoDeveSerAtualizado() {
-        // Placeholder: sem UI tree, validar algum indicador textual esperado
-        assertTrue(levelPage.esperarTextoVisivel("%", 10), "Progresso não atualizado (validação OCR simplificada)");
+    @Entao("a tela inicial do primeiro nível deve ser exibida")
+    public void a_tela_inicial_do_primeiro_nivel_deve_ser_exibida() {
+        boolean visivel = homePage.esperarTextoVisivel("Nível 1", 15);
+        Assert.assertTrue("Tela do primeiro nível não apareceu.", visivel);
     }
 }
+
+

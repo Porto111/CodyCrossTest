@@ -9,6 +9,6 @@ Funcionalidade: Jogar primeiro nível do CodyCross
   Cenário: Acessar o primeiro nível e preencher a primeira palavra
 
     Dado que o aplicativo CodyCross foi aberto
-    Quando acesso o primeiro nível do jogo
+    Quando toco no botão Salvar Progresso
     E seleciono as letras da palavra inicial
     Então o progresso do nível deve ser atualizado
