@@ -1,14 +1,10 @@
 # language: pt
+Funcionalidade: Jogar CodyCross via OCR
 
-Funcionalidade: Jogar primeiro nível do CodyCross
-
-  Como jogador
-  Quero acessar o primeiro nível do jogo
-  Para iniciar a resolução das palavras do tema
-
-  Cenário: Acessar o primeiro nível e preencher a primeira palavra
-
+  Contexto:
     Dado que o aplicativo CodyCross foi aberto
-    Quando toco no botão Salvar Progresso
-    E seleciono as letras da palavra inicial
-    Então o progresso do nível deve ser atualizado
+
+  Cenário: Iniciar o jogo
+    Quando eu tocar no botão Jogar
+    E eu tocar no botão Salvar progresso
+    Então a tela inicial do primeiro nível deve ser exibida

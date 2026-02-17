@@ -49,7 +49,7 @@ public abstract class BasePage {
 
     //Método criaado para utilização das coordenadas posicionais
     // Tap por coordenadas (x, y) usando ações W3C
-    protected void tap(int x, int y) {
+    public void tap(int x, int y) {
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence seq = new Sequence(finger, 1);
         seq.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, y));
@@ -72,7 +72,6 @@ public abstract class BasePage {
     }
 
     public boolean tocarPorTexto(String texto) {
-        // passa um lambda que chama o tap da própria BasePage
         return ocrService.tocarNoTexto(texto);
     }
 
