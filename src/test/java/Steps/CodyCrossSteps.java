@@ -42,8 +42,9 @@ public class CodyCrossSteps {
     }
 
     @Quando("eu toco no botão {string}")
-    public void euTocoNoBotao(String botao) {
+    public void euTocoNoBotao(String botao) throws InterruptedException {
         // No momento suportamos especificamente o botão "Jogar"
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
         homePage.tocarBotaoJogar();
     }
 
@@ -61,7 +62,7 @@ public class CodyCrossSteps {
 //    }
 
     @Quando("eu tocar no botão Jogar")
-    public void eu_tocar_no_botao_jogar() {
+    public void eu_tocar_no_botao_jogar() throws InterruptedException {
         homePage.tocarBotaoJogar();
     }
 
