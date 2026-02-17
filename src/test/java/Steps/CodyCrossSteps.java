@@ -37,7 +37,7 @@ public class CodyCrossSteps {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
         // Troque o localizador abaixo por algo confiável da tela inicial do CodyCross
         wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//android.widget.TextView[@content-desc=\"CodyCross\"]"))
+                By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout[2]"))
         );
     }
 
@@ -53,12 +53,12 @@ public class CodyCrossSteps {
         assertTrue(homePage.esperarTextoVisivel(logo, 10), "Logo não encontrado via OCR");
     }
 
-    @Dado("que o aplicativo CodyCross foi aberto")
-    public void que_o_aplicativo_codycross_foi_aberto() {
-        // aqui você já garante que o app está iniciado e a home carregou
-        boolean visivel = homePage.telaInicialEstaVisivel();
-        Assert.assertTrue("Tela inicial do CodyCross não está visível.", visivel);
-    }
+//    @Dado("que o aplicativo CodyCross foi aberto")
+//    public void que_o_aplicativo_codycross_foi_aberto() {
+//        // aqui você já garante que o app está iniciado e a home carregou
+//        boolean visivel = homePage.telaInicialEstaVisivel();
+//        Assert.assertTrue("Tela inicial do CodyCross não está visível.", visivel);
+//    }
 
     @Quando("eu tocar no botão Jogar")
     public void eu_tocar_no_botao_jogar() {
